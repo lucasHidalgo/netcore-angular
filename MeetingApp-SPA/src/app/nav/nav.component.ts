@@ -19,4 +19,15 @@ export class NavComponent implements OnInit {
       console.log(error);
     });
   }
+
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    // doble signo de exclamacion retorna true o false, si token es nulo retornara falso
+    return !!token;
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    console.log('logged out');
+  }
 }
