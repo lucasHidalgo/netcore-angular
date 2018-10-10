@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MeetingApp.API.Data;
 using MeetingApp.API.Dtos;
 using MeetingApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -43,7 +44,7 @@ namespace MeetingApp.API.Controllers
 
             return StatusCode(201);
         }
-
+        
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto usuario)
         {
