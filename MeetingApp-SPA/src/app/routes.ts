@@ -5,6 +5,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { HomeComponent } from './home/home.component';
 import { MessagesComponent } from './messages/messages.component';
 
+
  export const appRoutes: Routes = [
      {path: '', component: HomeComponent},
      {

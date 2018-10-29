@@ -9,5 +9,6 @@ namespace MeetingApp.API.Data
 
         public DbSet<Value> Values{get;set;}
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Photos> Photos { get; set; }
     }
 }
