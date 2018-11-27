@@ -25,7 +25,9 @@ namespace MeetingApp.API.Helpers
                 .ForMember(dest=>dest.Age,opt=>{
                     opt.ResolveUsing(d=>d.DateOfBirth.CalculateAge());
                 });
+            //automappear desde el controlador    
             CreateMap<Photos, PhotosForDetailedDto>();
+            CreateMap<UserForUpdateDto, Usuario>();
 
         }
     }
