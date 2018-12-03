@@ -45,5 +45,11 @@ namespace MeetingApp.API.Data
         {
             return await _context.Usuarios.Where(predicate).ToListAsync();
         }
+
+        public async Task<Photos> GetPhoto(int id)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p=> p.Id == id);
+            return photo;
+        }
     }
 }
