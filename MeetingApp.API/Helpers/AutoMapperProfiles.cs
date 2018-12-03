@@ -28,6 +28,8 @@ namespace MeetingApp.API.Helpers
             //automappear desde el controlador    
             CreateMap<Photos, PhotosForDetailedDto>();
             CreateMap<UserForUpdateDto, Usuario>();
+            CreateMap<Photos, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto,Photos>();
 
         }
     }
