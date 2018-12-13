@@ -15,5 +15,6 @@ namespace MeetingApp.API.Data
          Task<Usuario> GetUser(int id);
          Task<IEnumerable<Usuario>> TestUsuario(Expression<Func<Usuario,bool>> predicate);
          Task<Photos> GetPhoto(int id);
+         Task<Photos> GetMainPhotoForUser(int userId);
     }
 }
