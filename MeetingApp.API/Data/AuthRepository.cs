@@ -23,7 +23,7 @@ namespace MeetingApp.API.Data
 
         public async Task<Usuario> Login(string nombreUsuario, string password)
         {
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x=>x.NombreUsuario == nombreUsuario);
+            var usuario = await _context.Usuarios.Include(p=> p.Photos).FirstOrDefaultAsync(x=>x.NombreUsuario == nombreUsuario);
 
             if(usuario == null){return null;}
 

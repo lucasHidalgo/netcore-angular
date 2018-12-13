@@ -29,4 +29,8 @@ constructor(private http: HttpClient) { }
     return this.http.post(this.baseUrl + 'users/' + idUser + '/photos/' + id + '/setMain',{});
   } 
 
+  deletePhoto(idUser: number, id: number) {
+    return this.http.delete(this.baseUrl + 'users/' + idUser + '/photos/' + id);
+  }
+
 }
