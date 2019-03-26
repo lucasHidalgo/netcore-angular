@@ -20,16 +20,17 @@ namespace MeetingApp.API.Helpers
                 });
             CreateMap<Usuario, UserForDetailedDto>().ForMember(dest => dest.PhotoUrl, opt => {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p=>p.IsMain).Url);
-                    
+
                 })
                 .ForMember(dest=>dest.Age,opt=>{
                     opt.ResolveUsing(d=>d.DateOfBirth.CalculateAge());
                 });
-            //automappear desde el controlador    
+            //automappear desde el controlador
             CreateMap<Photos, PhotosForDetailedDto>();
             CreateMap<UserForUpdateDto, Usuario>();
             CreateMap<Photos, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto,Photos>();
+            CreateMap<UserForRegisterDto, Usuario>();
 
         }
     }

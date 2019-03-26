@@ -31,23 +31,22 @@ namespace MeetingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Registrarse(UserForRegisterDto usuario)
         {
-            //validate request            
+            //validate request
             usuario.NombreUsuario = usuario.NombreUsuario.ToLower();
 
             if (await _repo.ExisteUsuario(usuario.NombreUsuario))
             {
                 return BadRequest("Ya existe nombre usuario");
             }
-            var usuarioCrear = new Usuario
-            {
-                NombreUsuario = usuario.NombreUsuario
-            };
+            var usuarioCrear = _mapper.Map<Usuario>(usuario);
 
             var usuarioCreado = await _repo.Registrarse(usuarioCrear, usuario.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(usuarioCreado);
+
+            return CreatedAtRoute("GetUser",new {controller = "Users", id = usuarioCreado.Id}, userToReturn );
         }
-        
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto usuario)
         {
