@@ -15,7 +15,7 @@ export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
   @Output() getMmemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
-  hasBaseDropZoneOver = false;  
+  hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   currentMain: Photo;
 
@@ -42,7 +42,7 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
-      if(response){
+      if (response) {
         const res: Photo =  JSON.parse(response);
         const photo = {
           id: res.id,
@@ -76,7 +76,7 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   deletePhoto(id: number) {
-    this.alertify.confirm('Are you sure you want to delete this photo ? ',() => {
+    this.alertify.confirm('Are you sure you want to delete this photo ? ', () => {
       this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
        this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
        this.alertify.success('photo deleted');

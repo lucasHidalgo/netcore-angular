@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MeetingApp.API.Data;
 using MeetingApp.API.Dtos;
+using MeetingApp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeetingApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
