@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using MeetingApp.API.Helpers;
 using MeetingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,9 +33,22 @@ namespace MeetingApp.API.Data
             return user;
         }
 
-        public async Task<IEnumerable<Usuario>> GetUsers()
+        public async Task<PagedList<Usuario>> GetUsers(UserParams userParams)
         {
-            return await _context.Usuarios.Include(p=>p.Photos).ToListAsync();
+            var users =  _context.Usuarios.Include(p=>p.Photos).AsQueryable();
+
+            users = users.Where(x => x.Id != userParams.UserId);
+            users = users.Where(x => x.Gender == userParams.Gender);
+            if(userParams.MinAge != 18 || userParams.MaxAge != 99)
+            {
+                var min = DateTime.Today.AddYears(-userParams.MaxAge -1);
+                var max = DateTime.Today.AddYears(-userParams.MinAge);
+
+                users = users.Where(x=>x.DateOfBirth >= min && x.DateOfBirth <= max);
+            }
+
+
+            return await PagedList<Usuario>.CreateAsync(users, userParams.PageNumber,userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()
