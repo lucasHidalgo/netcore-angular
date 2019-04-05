@@ -35,7 +35,7 @@ namespace MeetingApp.API.Data
 
         public async Task<PagedList<Usuario>> GetUsers(UserParams userParams)
         {
-            var users =  _context.Usuarios.Include(p=>p.Photos).AsQueryable();
+            var users =  _context.Usuarios.Include(p=>p.Photos).OrderByDescending(u=> u.LastActivity).AsQueryable();
 
             users = users.Where(x => x.Id != userParams.UserId);
             users = users.Where(x => x.Gender == userParams.Gender);
@@ -46,7 +46,17 @@ namespace MeetingApp.API.Data
 
                 users = users.Where(x=>x.DateOfBirth >= min && x.DateOfBirth <= max);
             }
-
+            if(!string.IsNullOrEmpty(userParams.OrderBy)){
+                switch (userParams.OrderBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(u=> u.Created);
+                        break;
+                    default:
+                        users = users.OrderByDescending(u=> u.LastActivity);
+                        break;
+                }
+            }
 
             return await PagedList<Usuario>.CreateAsync(users, userParams.PageNumber,userParams.PageSize);
         }

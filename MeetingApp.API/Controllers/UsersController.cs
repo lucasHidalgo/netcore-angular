@@ -28,9 +28,9 @@ namespace MeetingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
-            var userFromRepo= await _repo.GetUser(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
 
-            userParams.UserId = userFromRepo.id;
+            userParams.UserId = userFromRepo.Id;
 
             if(string.IsNullOrEmpty(userParams.Gender)){
                 userParams.Gender = userFromRepo.Gender =="male" ? "female":"male" ;
