@@ -20,7 +20,10 @@ namespace MeetingApp.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photos> Photos { get; set; }
-        
-        
+        public ICollection<Like> Likers {get;set;}
+        public ICollection<Like> Likees { get; set; }
+
+
+
     }
 }
